@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('stopify/', views.stopify),
+    path('stopify/callback/', views.callback),
+    path('stopify/home/', views.home),
 ]

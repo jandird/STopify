@@ -1,6 +1,14 @@
-from django.http import HttpResponse
+
 from django.shortcuts import render
 
+
 def stopify(request):
-    # return HttpResponse("STopify")
     return render(request, 'stopify.html')
+
+
+def callback(request):
+    return render(request, 'loginFinish.html', {})
+
+
+def home(request):
+    return render(request, 'home.html')
