@@ -1,34 +1,48 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>STopify Start</title>
+    <title>STopify Login</title>
 
-    <script language="JavaScript">
-        let loginSpotify = function(){
-        let SPOTIFY_CLIENT_ID = "fbc55ede5d87495d9d0ab6ac2d0d8d22";
-        let SPOTIFY_REDIRECT_URI = "http://localhost:8000/stopify/callback/";
-        let spotifyScope = "user-top-read";
-        let spotifyAuthEndpoint = "https://accounts.spotify.com/authorize?"+"client_id="+SPOTIFY_CLIENT_ID+"&redirect_uri="+SPOTIFY_REDIRECT_URI+"&scope="+spotifyScope+"&response_type=token&state=123";
-        window.open(spotifyAuthEndpoint,'callBackWindow','height=500,width=400');
-        //This event listener will trigger once your callback page adds the token to localStorage
-        window.addEventListener("storage",function(event){
-            if (event.key == "accessToken"){
-                let spAccessToken = event.newValue;
-                console.log(spAccessToken);
-                window.location.href = "http://localhost:8000/stopify/home/";
-            }
-        });
-    }
-    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stopify.css' %}">
 </head>
 <body>
-    <h1>STopify</h1>
-    <h2>This app allows you view your top Spotify tracks and artists. To get started login in to your
-    Spotify account.</h2>
-{#    <a href="http://localhost:8000/stopify/login/" class="btn">Login with Spotify</a>#}
+    <div class="container black_bg" id="main">
+        <img src="{% static 'images/Spotify_Logo_RGB_Green.png' %}" alt="Spotify_Logo_RGB_Green.png" class="center" id="spotifyLogo">
 
-    <button onclick="loginSpotify()">Login with Spotify</button>
+        <h1 class="display-1">Topify</h1>
+
+        <h2>This website allows you view your top Spotify tracks and artists. To get started login in to your
+        Spotify account.</h2>
+
+        <button onclick="loginSpotify()" class="btn btn-light" id =loginButton>Login with Spotify</button>
+    </div>
+
 </body>
 </html>
+
+
+<script language="JavaScript">
+    let loginSpotify = function(){
+    let SPOTIFY_CLIENT_ID = "fbc55ede5d87495d9d0ab6ac2d0d8d22";
+    let SPOTIFY_REDIRECT_URI = "http://localhost:8000/stopify/callback/";
+    let spotifyScope = "user-top-read";
+    let spotifyAuthEndpoint = "https://accounts.spotify.com/authorize?"+"client_id="+SPOTIFY_CLIENT_ID+"&redirect_uri="+SPOTIFY_REDIRECT_URI+"&scope="+spotifyScope+"&response_type=token&state=123";
+
+    window.open(spotifyAuthEndpoint,'callBackWindow','height=500,width=400');
+    window.addEventListener("storage",function(event){
+        if (event.key == "accessToken"){
+            let spAccessToken = event.newValue;
+            console.log(spAccessToken);
+            window.location.href = "http://localhost:8000/stopify/home/";
+        }
+    });
+}
+</script>
