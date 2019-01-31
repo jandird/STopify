@@ -1,0 +1,27 @@
+body {
+    background: black;
+    font-family: Ubuntu;
+    font-size: 150%;
+    color: white;
+}
+
+#header {
+    background-color: white;
+}
+
+h1 {
+    color: black;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 900%;
+    text-align: center;
+}
+
+h2 {
+    font-size: 110%;
+    font-style: oblique;
+}
+
+#selection {
+    margin-top: 25px;
+}

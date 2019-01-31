@@ -1,10 +1,56 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>STopify</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 </head>
 <body>
+    <div class="container-fluid" id="header">
+        <h1>Topify</h1>
+    </div>
 
+    <div class="container">
+        <div class="row" id="selection">
+            <div class="col-sm-4">
+                <h2>Step 1: Top Tracks or Top Artists?</h2>
+                <div class="radio">
+                  <label><input type="radio" name="type" checked>Tracks</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="type">Artists</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h2>Step 2: How long back we going?</h2>
+                <div class="radio">
+                  <label><input type="radio" name="time" checked>Short Term (Past Month)</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="time">Medium Term (Past Year)</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="time">Long Term (All Time)</label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h2>Step 3: How many results do you want?</h2>
+                <div class="form-group" id="numContainer">
+                  <label for="number-input" class="col-2 col-form-label">Number of Tracks or Artists</label>
+                  <div class="col-10">
+                    <input class="form-control" type="number" value="50" id="number-input">
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
