@@ -8,11 +8,11 @@
 
     <script language="JavaScript">
         $('document').ready(function(){
-        let spotifyAccessToken = (String(window.location.hash)).match(/\#(?:access_token)\=([\S\s]*?)\&/)[1];
-        console.log(spotifyAccessToken);
-        localStorage.clear();
-        localStorage.setItem('accessToken', spotifyAccessToken);
-        window.close();
+            let spotifyAccessToken = (String(window.location.hash)).match(/\#(?:access_token)\=([\S\s]*?)\&/)[1];
+            console.log(spotifyAccessToken);
+            localStorage.clear();
+            localStorage.setItem('accessToken', spotifyAccessToken);
+            window.close();
         });
     </script>
 </head>

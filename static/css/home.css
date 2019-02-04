@@ -1,7 +1,6 @@
 body {
     background: black;
     font-family: Ubuntu;
-    font-size: 150%;
     color: white;
 }
 
@@ -13,7 +12,7 @@ h1 {
     color: black;
     font-weight: 500;
     font-style: italic;
-    font-size: 900%;
+    font-size: 600%;
     text-align: center;
 }
 

@@ -4,16 +4,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>STopify</title>
+    <title>Topify</title>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/spotify-web-api.js' %}"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500i" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 </head>
 <body>
+
     <div class="container-fluid" id="header">
         <h1>Topify</h1>
     </div>
@@ -22,35 +22,55 @@
         <div class="row" id="selection">
             <div class="col-sm-4">
                 <h2>Step 1: Top Tracks or Top Artists?</h2>
-                <div class="radio">
-                  <label><input type="radio" name="type" checked>Tracks</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" value="trackOption" checked>
+                    <label class="form-check-label" for="exampleRadios1">Tracks</label>
                 </div>
-                <div class="radio">
-                  <label><input type="radio" name="type">Artists</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" value="artistOption">
+                    <label class="form-check-label" for="exampleRadios2">Artists</label>
                 </div>
             </div>
             <div class="col-sm-4">
                 <h2>Step 2: How long back we going?</h2>
-                <div class="radio">
-                  <label><input type="radio" name="time" checked>Short Term (Past Month)</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="time" value="stOption" checked>
+                    <label class="form-check-label" for="exampleRadios1">Short Term (Past Month)</label>
                 </div>
-                <div class="radio">
-                  <label><input type="radio" name="time">Medium Term (Past Year)</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="time" value="mtOption">
+                    <label class="form-check-label" for="exampleRadios2">Medium Term (Past 6 Months)</label>
                 </div>
-                <div class="radio">
-                  <label><input type="radio" name="time">Long Term (All Time)</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="time" value="ltOption">
+                    <label class="form-check-label" for="exampleRadios2">Long Term (All Time)</label>
                 </div>
             </div>
             <div class="col-sm-4">
                 <h2>Step 3: How many results do you want?</h2>
                 <div class="form-group" id="numContainer">
-                  <label for="number-input" class="col-2 col-form-label">Number of Tracks or Artists</label>
-                  <div class="col-10">
+                    <label for="number-input">Number of Tracks or Artists</label>
                     <input class="form-control" type="number" value="50" id="number-input">
-                  </div>
                 </div>
             </div>
         </div>
+
+        <button onclick="load();"> Press Me </button>
     </div>
 </body>
 </html>
+
+<script>
+    let load = function(){
+        let spotifyApi = new SpotifyWebApi();
+        console.log(localStorage.getItem('accessToken'));
+
+        let spAccessToken = localStorage.getItem('accessToken');
+        spotifyApi.setAccessToken(spAccessToken);
+
+        spotifyApi.getMyTopTracks({limit: 50, offset: 2000, time_range: 'long_term'}, function(err, data) {
+          if (err) console.error(err);
+          else console.log('Top Tracks', data);
+        });
+    };
+</script>

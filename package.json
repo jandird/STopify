@@ -1,0 +1,7 @@
+{
+  "name": "STopify",
+  "version": "1.0.0",
+  "dependencies": {
+    "spotify-web-api-js": "^1.1.1"
+  }
+}

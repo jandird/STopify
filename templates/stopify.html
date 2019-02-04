@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>STopify Login</title>
+    <title>Topify Login</title>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -31,20 +31,20 @@
 
 <script language="JavaScript">
     let loginSpotify = function(){
-    let SPOTIFY_CLIENT_ID = "fbc55ede5d87495d9d0ab6ac2d0d8d22";
-    let SPOTIFY_REDIRECT_URI = "http://localhost:8000/stopify/callback/";
-    let spotifyScope = "user-top-read";
-    let spotifyAuthEndpoint = "https://accounts.spotify.com/authorize?"+"client_id="+SPOTIFY_CLIENT_ID+"&redirect_uri="+SPOTIFY_REDIRECT_URI+"&scope="+spotifyScope+"&response_type=token&state=123";
+        let SPOTIFY_CLIENT_ID = "fbc55ede5d87495d9d0ab6ac2d0d8d22";
+        let SPOTIFY_REDIRECT_URI = "http://localhost:8000/stopify/callback/";
+        let spotifyScope = "user-top-read";
+        let spotifyAuthEndpoint = "https://accounts.spotify.com/authorize?"+"client_id="+SPOTIFY_CLIENT_ID+"&redirect_uri="+SPOTIFY_REDIRECT_URI+"&scope="+spotifyScope+"&response_type=token&state=123";
 
-    window.open(spotifyAuthEndpoint,'callBackWindow','height=500,width=400');
-    window.addEventListener("storage",function(event){
-        if (event.key == "accessToken"){
-            let spAccessToken = event.newValue;
-            {#console.log(spAccessToken);#}
-            localStorage.clear();
-            localStorage.setItem('accessToken', spAccessToken);
-            window.location.href = "http://localhost:8000/stopify/home/";
-        }
-    });
-}
+        window.open(spotifyAuthEndpoint,'callBackWindow','height=500,width=400');
+        window.addEventListener("storage",function(event){
+            if (event.key == "accessToken"){
+                let spAccessToken = event.newValue;
+                {#console.log(spAccessToken);#}
+                localStorage.clear();
+                localStorage.setItem('accessToken', spAccessToken);
+                window.location.href = "http://localhost:8000/stopify/home/";
+            }
+        });
+    }
 </script>
