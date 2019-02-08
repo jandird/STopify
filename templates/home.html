@@ -19,8 +19,8 @@
     </div>
 
     <div class="container">
-        <div class="row" id="selection">
-            <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm-4 selection">
                 <h2>Step 1: Top Tracks or Top Artists?</h2>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" value="trackOption" checked>
@@ -31,7 +31,7 @@
                     <label class="form-check-label" for="exampleRadios2">Artists</label>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 selection">
                 <h2>Step 2: How long back we going?</h2>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="time" value="stOption" checked>
@@ -46,7 +46,7 @@
                     <label class="form-check-label" for="exampleRadios2">Long Term (All Time)</label>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 selection">
                 <h2>Step 3: How many results do you want?</h2>
                 <div class="form-group" id="numContainer">
                     <label for="number-input">Number of Tracks or Artists</label>
@@ -55,22 +55,88 @@
             </div>
         </div>
 
-        <button onclick="load();"> Press Me </button>
+        <button id="loadButton" onclick="load();"> Get My Top Tracks/Artists </button>
     </div>
+
+    <div class="container" id="dataContainer"></div>
 </body>
 </html>
 
 <script>
     let load = function(){
         let spotifyApi = new SpotifyWebApi();
-        console.log(localStorage.getItem('accessToken'));
 
         let spAccessToken = localStorage.getItem('accessToken');
         spotifyApi.setAccessToken(spAccessToken);
 
-        spotifyApi.getMyTopTracks({limit: 50, offset: 2000, time_range: 'long_term'}, function(err, data) {
-          if (err) console.error(err);
-          else console.log('Top Tracks', data);
+        let loadedData;
+
+        spotifyApi.getMyTopTracks({limit: 50, offset: 0, time_range: 'long_term'}, function(err, data) {
+            if (err) console.error(err);
+            else {
+                loadedData = data;
+                console.log('Top Tracks', data);
+
+                let dataContainer = document.querySelector("#dataContainer");
+
+                dataContainer.innerHTML = '<div class="row">\n' +
+                    '            <div class="col-1">\n' +
+                    '                <p>Number</p>\n' +
+                    '            </div>\n' +
+                    '            <div class="col-3">\n' +
+                    '                <p>Album Art</p>\n' +
+                    '            </div>\n' +
+                    '            <div class="col-2">\n' +
+                    '                <p>Song</p>\n' +
+                    '            </div>\n' +
+                    '            <div class="col-2">\n' +
+                    '                <p>Artist</p>\n' +
+                    '            </div>\n' +
+                    '            <div class="col-2">\n' +
+                    '                <p>Album</p>\n' +
+                    '            </div>\n' +
+                    '            <div class="col-2">\n' +
+                    '                <p>Popularity</p>\n' +
+                    '            </div>\n' +
+                    '        </div>';
+
+                let size = loadedData.total;
+
+                for (let i = 0; i < size; i++){
+                    let item = loadedData.items[i];
+
+                    let number = i + 1;
+                    let albumArt = item.album.images[1].url;
+                    let song = item.name;
+                    let artist = item.artists[0].name;
+                    let album = item.album.name;
+                    let popularity = item.popularity;
+
+                    console.log(albumArt);
+
+                    dataContainer.innerHTML += '<div class="row dataRow">\n' +
+                    '            <div class="col-1">\n' +
+                    '                <p>' + number + '.</p>\n' +
+                    '            </div>\n' +
+                    '            <div class="col-3">\n' +
+                    '                <img src="' + albumArt + '" alt="albumCover" class="albumArt">\n' +
+                    '            </div>\n' +
+                    '            <div class="col-2">\n' +
+                    '                <p>' + song + '</p>\n' +
+                    '            </div>\n' +
+                    '            <div class="col-2">\n' +
+                    '                <p>' + artist + '</p>\n' +
+                    '            </div>\n' +
+                    '            <div class="col-2">\n' +
+                    '                <p>' + album + '</p>\n' +
+                    '            </div>\n' +
+                    '            <div class="col-2">\n' +
+                    '                <p>' + popularity + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>';
+
+                }
+            }
         });
     };
 </script>

@@ -21,6 +21,36 @@ h2 {
     font-style: oblique;
 }
 
-#selection {
+.selection {
     margin-top: 25px;
+}
+
+#loadButton {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+
+    color: black;
+    font-size: 150%;
+    background-color: #1DB954;
+    border-color: transparent;
+
+    width: 40%;
+    /*height: 100px;*/
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+}
+
+#dataContainer {
+    margin-top: 30px;
+}
+
+.dataRow{
+    margin-top: 10px;
+}
+
+.albumArt{
+    width: 50%;
 }
